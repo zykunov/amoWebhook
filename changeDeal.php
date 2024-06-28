@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $entityId = $_POST["leads"]["update"][0]["id"];
     $dealName = $_POST["leads"]["update"][0]["name"];
     $createdUserId = $_POST["leads"]["update"][0]["modified_user_id"];
-    $timeCreated = date("d/m/y H:i", $_POST["leads"]["add"][0]["last_modified"]);
+    $timeUpdated = date("d/m/y H:i", $_POST["leads"]["update"][0]["updated_at"]);
     $UpdatedUserName = getUser($accessToken, $createdUserId);// Получаем имя по Id аккаунта
 
     $link = "https://" . $subdomain . ".amocrm.ru/api/v4/leads/$entityId/notes";
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = [[
         "note_type" => "common",
         "params" => [
-            "text" => "Сделка обновлена: $dealName, обновил: $UpdatedUserName, время - $timeCreated" //то текстовое примечание должно содержать название сделки/контакта, ответственного и время добавления карточки
+            "text" => "Сделка обновлена: $dealName, обновил: $UpdatedUserName, время - $timeUpdated" //то текстовое примечание должно содержать название сделки/контакта, ответственного и время добавления карточки
         ]]
     ];
 
